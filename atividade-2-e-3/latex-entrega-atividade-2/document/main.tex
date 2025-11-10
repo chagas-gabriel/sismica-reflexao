@@ -1,0 +1,131 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{indentfirst}
+\usepackage{float}
+
+% Configurações de página
+\geometry{a4paper, left=2.5cm, right=2.5cm, top=2.5cm, bottom=2.5cm}
+
+% Formatação de seções
+\titleformat{\section}{\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{1em}{}
+
+% Configuração do cabeçalho
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textbf{AGG0327}}
+\fancyhead[R]{\textbf{Atividade 2}}
+\fancyfoot[C]{\thepage}
+
+\begin{document}
+\thispagestyle{fancy}
+
+\begin{center}
+    \textbf{AGG0327 – Sismica de Reflexão \hfill Atividade 1 \hfill Entrega até 11/11/25}
+\end{center}
+
+\vspace{0.3cm} % Espaço reduzido
+
+\textbf{Nome:} Gabriel Aparecido das Chagas Silva 14571098
+
+\vspace{0.3cm} % Espaço reduzido
+
+\begin{center}
+    \textbf{ANÁLISE DE VELOCIDADES (com o Painel NMO), Correção de NMO e
+EMPILHAMENTO: dados sintéticos exemplificando uma linha sísmica}
+\end{center}
+
+
+\section{Questões Parte 1}
+
+
+\subsection{Execute o script ver.sh (sh ver.sh). Analise a imagem dos dados da linha sísmica e identifique qual dos arquivos está
+agrupado em sismogramas de pontos de tiro e qual está agrupado em sismogramas CMP.}
+
+
+
+
+\begin{itemize}
+    \item \textbf{arq1 -} Sismograma de pontos de tiro
+
+
+    \item \textbf{arq2 -} Sismograma CMP
+\end{itemize}
+
+
+\subsection{Utilize o script velan1.sh para realizar a análise de velocidades.
+Escolha 3 CDPs, e para cada CDP escolhido anote os valores de t0 e da velocidade que
+ajustou o NMO para cada reflexão observada.}
+
+
+
+\begin{itemize}
+    \item \textbf{CDP 100}: 
+    
+    $t_0 = 0.38s$, $V_{NMO} = 1600 m/s$
+
+    $t_0 = 0.8s$, $V_{NMO} = 2200 m/s$
+
+    $t_0 = 1.3s$, $V_{NMO} = 2400 m/s$
+
+    \item \textbf{CDP 150}:
+
+    $t_0 = 0.55s$, $V_{NMO} = 1700 m/s$
+
+    $t_0 = 1.1s$, $V_{NMO} = 2300 m/s$
+
+    $t_0 = 1.6s$, $V_{NMO} = 2500 m/s$
+
+    \item \textbf{CDP 200}:
+
+    $t_0 = 0.7s$, $V_{NMO} = 1600 m/s$
+
+    $t_0 = 1.1s$, $V_{NMO} = 2380 m/s$
+
+    $t_0 = 1.5s$, $V_{NMO} = 2600 m/s$
+\end{itemize}
+
+
+
+\subsection{Faça a correção de NMO e empilhamento. Insira um printscreen da imagem obtida. No comando a seguir, substitua n1,n2,n3 pelos números dos CDPs que você escolheu (em ordem crescente) e escreva os valores dos pares de parâmetros vnmo= e tnmo=, de cada
+CDP, respectivamente}
+
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{nmo.png}
+    \caption{Figura obtida}
+    \label{fig:placeholder}
+\end{figure}
+
+
+
+
+\section{Parte 2}
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{velocity-stack.png}
+    \caption{Empilhamento}
+    \label{fig:placeholder}
+\end{figure}
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{semblance.png}
+    \caption{Espectro de velocidade}
+    \label{fig:placeholder}
+\end{figure}
+
+\end{document}
