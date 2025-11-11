@@ -1,0 +1,259 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{indentfirst}
+\usepackage{float}
+
+% Configurações de página
+\geometry{a4paper, left=2.5cm, right=2.5cm, top=2.5cm, bottom=2.5cm}
+
+% Formatação de seções
+\titleformat{\section}{\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{1em}{}
+
+% Configuração do cabeçalho
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textbf{AGG0327}}
+\fancyhead[R]{\textbf{Atividade 3}}
+\fancyfoot[C]{\thepage}
+
+\begin{document}
+\thispagestyle{fancy}
+
+\begin{center}
+    \textbf{AGG0327 – Sismica de Reflexão \hfill Atividade 3 \hfill Entrega até 25/11/25}
+\end{center}
+
+\vspace{0.3cm} % Espaço reduzido
+
+\textbf{Nome:} Gabriel Aparecido das Chagas Silva 14571098
+
+\vspace{0.3cm} % Espaço reduzido
+
+\begin{center}
+    \textbf{Sísmica de reflexão - atividade 3}
+\end{center}
+
+
+
+Seja a equação tempo-distância da onda refletida em uma interface plana e horizontal, em um meio
+com velocidade constante (V), dada por:
+
+\begin{equation}
+    t^2(X) = t_{0}2 + \frac{X^2}{V^2}
+\end{equation}
+
+
+
+\section{Questão 1}
+
+\textbf{Qual o significado do termo t0? E qual a relação de t0 com a espessura da camada (lembrando que a reflexão ocorreu na interface
+da base da camada)?}\\
+
+
+\textbf{\textit{Resposta:}}
+------------------
+
+
+O termo $t_0$ é o tempo de offset zero, o tempo vertical de ida e volta na onda na vertical, assumindo a fonte e o refletor no mesmo ponto $x=0$. 
+
+Sabendo que a distância é a velocidade multiplicada pelo tempo, pode-se achar uma relação entre a espessura h e o tempo $t_0$:
+
+\begin{equation}
+    2h = V \cdot t_0 \implies h = \frac{V \cdot t_0}{2}
+\end{equation}
+
+
+\section{Questão 2}
+
+\textbf{Para um dado afastamento fonte-receptor (x), a diferença entre o tempo de reflexão t(x) e o tempo da reflexão normal à interface (t(x=0)) é denominada de “Sobretempo Normal”, em inglês o termo empregado é “Normal Move Out” e daí a sigla NMO:}
+
+\begin{equation}
+    \Delta t_{NMO} = t(x) - t_0 
+\end{equation}
+
+
+\textbf{Mostre que $\Delta t_{NMO}$ dado pela diferença entre $t(x)$ (eq. 1) e $t_0$, pode ser expresso pelas duas equações a seguir (sendo $V = V_{NMO}$):}
+
+
+\begin{equation}
+    \Delta t_{NMO} = t_0 [ \sqrt{1 + \left( \frac{x}{V_{NMO} t_0} \right)^2} - 1]
+\end{equation}
+
+
+\begin{equation}
+    \Delta t_{NMO} = t(x) - \sqrt{t²(x) - \frac{x²}{V²_{NMO}}}
+\end{equation} \\
+
+\textbf{\textit{Resposta:}}
+------------------
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{solucao-questao-2.png}
+    \caption{Solução da questão 2 feita a papel.}
+    \label{fig:placeholder}
+\end{figure}
+
+
+
+
+
+
+
+\section{Questão 3}
+
+\subsection{Camadas com menor velocidade $V$ apresentam maior ou menor $\Delta t_{NMO}$?}
+
+\textbf{\textit{Resposta:}}
+------------------
+
+
+Camadas com menor velocidade apresentam maior $\Delta t_{NMO}$, pois essas grandezas são inversamente proporcionais.
+
+
+\subsection{Qual dos eventos refletidos na imagem a seguir tem menor velocidade?}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{imagem-3-b.png}
+    \caption{Imagem da questão 3b}
+    \label{fig:placeholder}
+\end{figure}
+
+\textbf{\textit{Resposta:}}
+------------------
+
+O evento $t_{0,1}$ tem menor velocidade, pois possui maior $\Delta t_{NMO}$.
+
+
+
+\section{Questão 4}
+
+A Correção de NMO corresponde a subtrair o valor do Sobretempo Normal $\Delta t_{NMO}$ de $t(x) $ e assim obter o valor de $t_0$. Utilizando o valor de VNMO correto em qualquer das duas equações acima (4) ou (5), temos que a Correção de NMO  $V_{NMO}$ $t(x) - \Delta t_{NMO} = t_0$ corresponde visualmente à horizontalização da “hipérbole” na imagem do sismograma.
+
+Esboce como o evento hiperbólico de reflexão aparecerá no sismograma se utilizarmos valores
+errados de $V_{NMO}$, para as seguintes situações:
+
+\begin{itemize}
+    \item a) $V_{NMO} < V_{NMO_{correto}}$
+    \item b) $V_{NMO} > V_{NMO_{correto}}$
+\end{itemize}
+
+
+\textbf{\textit{Resposta:}}
+------------------
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{esboco-questao-4.png}
+    \caption{Esboço feito em papel.}
+    \label{fig:placeholder}
+\end{figure}
+
+
+\section{Questão 5}
+
+A partir da equação da Velocidade de RMS (Root Mean Square), deduza a equação da Velocidade Intervalar:
+
+\begin{equation}
+    V^2_{RMS} = \frac{\sum_{k=1}^{n} V²_k \Delta t_{0_k}}{t_{0_{n}}}
+\end{equation}
+
+\begin{equation}
+    V_{int} = V_{n} = \sqrt{\frac{V^2_{RMS} t_{0_{n}}  - V^2_{RMS}  t_{0_{n}-1}  }               {t_{0_n}  - t_{0_{n-1}}  }      }
+\end{equation}
+
+
+
+
+\textbf{\textit{Resposta:}}
+------------------
+
+
+A velocidade $V_{RMS}$ é a velocidade usada para a correção NMO, que torna a hipérbole horizontal. A velocidade $V_{int}$ é a velocidade real da camada analisada. 
+
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{deducao-questao-5.png}
+    \caption{Dedução da equação no papel.}
+    \label{fig:placeholder}
+\end{figure}
+
+
+
+
+\section{Questão 6}
+
+A partir da observação do sismograma abaixo e dos valores de velocidade RMS obtidos na análise
+de velocidades realizada, calcule as espessuras aproximadas das camadas geológicas identificadas.
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{imagem-questao-6.png}
+    \caption{Sismograma}
+    \label{fig:placeholder}
+\end{figure}
+
+
+\textbf{\textit{Resposta:}}
+------------------
+
+
+\begin{itemize}
+    \item Camada 1:
+
+    $V_{int_{1}} = V_{RMS_{1}}$ para a primeira camada. Logo, pode-se aplicar diretamente a equação (2):
+
+    $$ h = \frac{V \cdot t_0}{2} = 27.4 m$$
+
+
+    \item Camada 2:
+
+    Para a segunda camada:
+
+    $$ V_{int} = V_{2} = \sqrt{\frac{V^2_{RMS} t_{0_{2}}  - V^2_{RMS}  t_{0_{2}-1}  }               {t_{0_2}  - t_{0_{2-1}}  }   } = 2244.1 m/s $$  
+
+    Calculando o tempo da onda na camada:
+
+    $$ \Delta t_{0_{2}} = t_{0_{2}} - t_{0_{1}} = 0.041$$
+
+    Aplicando a equação (2):
+
+    $$ h = \frac{V \cdot t_0}{2} = 46.0 m$$
+
+    \item Camada 3:
+
+    Para a terceira camada:
+
+    $$V_{int} = V_{3} = \sqrt{\frac{V^2_{RMS} t_{0_{3}}  - V^2_{RMS}  t_{0_{3}-1}  }               {t_{0_3}  - t_{0_{3-1}}  }      } = 2649.7 m/s $$
+
+    Calculando o tempo da onda na camada:
+
+    $$ \Delta t_{0_{2}} = t_{0_{3}} - t_{0_{2}} = 0.044$$
+
+    Aplicando a equação (2):
+
+    $$ h = \frac{V \cdot t_0}{2} = 58.3 m$$
+    
+
+
+    
+
+    
+\end{itemize}
+
+
+
+\end{document}
