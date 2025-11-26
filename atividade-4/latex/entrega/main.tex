@@ -1,0 +1,276 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
+\usepackage{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{float}
+\usepackage{indentfirst}
+
+
+% Configuração das margens
+\geometry{top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm}
+
+% Configuração para exibição de comandos de terminal
+\lstset{
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    frame=single,
+    backgroundcolor=\color{gray!10},
+    columns=fullflexible
+}
+
+\begin{document}
+
+% --- Cabeçalho ---
+\noindent
+\textbf{AGG0327 Sísmica de Reflexão - Atividade 4} \\
+\textbf{Nome(s):} Gabriel Aparecido das Chagas Silva \\
+\textbf{Data:} 25/11/2025
+
+\vspace{0.5cm}
+
+% --- PARTE I ---
+\section*{PARTE I: Migração no domínio da frequência: exemplo didático com dado sintético}
+
+\textbf{Objetivos:} efetuar a migração sobre uma seção empilhada e analisar a influência de alguns fatores na qualidade da migração realizada no domínio da frequência.
+
+\subsection*{Arquivos de dados sintéticos:}
+
+\begin{itemize}
+    \item \texttt{data10.5.dx40}: frequência dominante da wavelet = 10 Hz; comprimento do registro ($T_{max}$) = 5 s; e espaçamento entre cdps = 40 m.
+    \item \texttt{data10.8.dx40}: frequência dominante da wavelet = 10 Hz; comprimento do registro ($T_{max}$) = 8 s; e espaçamento entre cdps = 40 m.
+    \item \texttt{data10.8.dx20}: frequência dominante da wavelet = 10 Hz; comprimento do registro ($T_{max}$) = 8 s; e espaçamento entre cdps = 20 m.
+    \item \texttt{data20.8.dx40}: frequência dominante da wavelet = 20 Hz; comprimento do registro ($T_{max}$) = 8 s; e espaçamento entre cdps = 40 m.
+\end{itemize}
+
+\hrule
+\vspace{0.5cm}
+
+\begin{enumerate}[label=\textbf{\arabic*)}]
+    % Questão 1
+    \item \textbf{Para o arquivo \texttt{data10.8.dx40}:}
+    
+    \begin{enumerate}[label=\textbf{1.\arabic*}]
+        \item Visualize os dados com o script \texttt{ver.sh} (\texttt{sh ver.sh}).
+        
+        \item Para realizar a migração é necessário fornecer o valor da velocidade.
+        
+        \textit{(Nota: dependendo da implementação do algoritmo de migração a velocidade é a "intervalar" ou a "de rms". Da forma como está implementado no SU, a migração de Stolt requer os valores da velocidade de rms).}
+        
+        Efetue a migração de Stolt, com o script \texttt{mig1.sh} para diferentes valores de velocidade e:
+        
+        \begin{enumerate}[label=\roman*)]
+            \item Explique quais foram os critérios utilizados para decidir qual é a velocidade correta.
+            
+            --------------------------------------------------------------------------
+            
+            O objetivo era desfazer os 'laços' entre as hiperboles, fazendo surgir pontos ou linhas contínuas, sem interseção de hipérboles. Para isso, manualmente buscou-se diminuir a velocidade quando as hipérboles que se encontravam tinham formato de 'U' e aumentar em formato de $\cap$. Quando as hipérboles pararam de se encontrar e formaram uma linha contínua, foi definida a velocidade correta. A figura 1 mostra o reusltado obtido.
+
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=1\linewidth]{migracao-stolt.png}
+                \caption{Migração realizada com velocidade de 1550m/s}
+                \label{fig:placeholder}
+            \end{figure}
+            
+            \vspace{1cm}
+            \item Forneça o valor da velocidade que escolheu.
+            
+            --------------------------------------------------------------------------
+            
+            O valor utilizado foi de $1550 m/s$.
+            
+            \vspace{1cm} % Espaço para resposta
+        \end{enumerate}
+    \end{enumerate}
+
+    % Questão 2
+    \item \textbf{Analisar influência do comprimento do registro (tempo máximo de aquisição dos dados):}
+    
+    Compare o resultado da migração anterior com o obtido para o arquivo \texttt{data10.5.dx40}. Explique o porquê das diferenças observadas.
+
+    --------------------------------------------------------------------------
+
+A figura 2 mostra o resultado obtido da migração para o caso dessa questão. 
+
+\begin{figure}[H]
+        \centering
+        \includegraphics[width=1\linewidth]{igracao-stolt1.png}
+        \caption{Migração realizada com velocidade de 1550 m/s.}
+        \label{fig:placeholder}
+    \end{figure}    
+
+O resultado difere da figura 1, e isso ocorre por conta da diferença do tempo de comprimento de registro. Essa mudança acontece pois a distância e o tempo são relacionados, e a migração tem menos tempo de coleta de dados o que faz ter menos recurso para focar o espalhamento da energia, já que pontos mais profundos têm respostas mais demoradas; com menor tempo, podem não ser obtidos dados suficientes em profundidade, e a energia é espalhada de forma mais inadequada. 
+    
+    \vspace{1cm} % Espaço para resposta
+
+    % Questão 3
+    \item \textbf{Analisar influência do falseamento espacial nos dados.}
+    
+    \begin{enumerate}[label=\textbf{3.\arabic*}]
+        \item Observe o espectro $f-k$ dos arquivos: \texttt{data10.8.dx40} e \texttt{data10.8.dx20}.
+        
+        Exemplo de comando para gerar a imagem do espectro:
+\begin{lstlisting}[language=bash]
+suspecfk < data10.8.dx40 | suximage cmap=rgb1 perc=99.9 windowtitle="Espectro f-k" label1="f (Hz)" label2="Kx (1/m) (numero de onda)" title="data10.8.dx40" &
+\end{lstlisting}
+
+    --------------------------------------------------------------------------
+
+    As figuras 3 e 4 mostram os espectros.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{f-k-espectro.png}
+    \caption{Espectro f-k com dx = 20m}
+    \label{fig:placeholder}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{f-k-espectro1.png}
+    \caption{Espectro f-k com dx = 40m}
+    \label{fig:placeholder}
+\end{figure}
+
+O formato de leque na figura 3 é o adequado, enquanto na figura 4 ele não se mantém, formando uma espécie de losango, por conta do falseamento.
+
+\vspace{1cm}
+
+        \item Efetue a migração para o arquivo \texttt{data10.8.dx20} e explique as diferenças entre o resultado da migração para o arquivo \texttt{data10.8.dx40}.
+
+            --------------------------------------------------------------------------
+
+            As figuras 5 e 6 mostram os reusltados obtidos. Com menor dx, nota-se menos vibrações e ruídos no dados, principalmente nas aréas de mergulho íngrime, onde o serrilhamento é significativamente menor. 
+
+            
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=1\linewidth]{migracao-stolt2.png}
+                \caption{Migração Stolt com dx = 20m}
+                \label{fig:placeholder}
+            \end{figure}
+
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=1\linewidth]{migracao-stolt3.png}
+                \caption{Migração Stolt com dx = 40m}
+                \label{fig:placeholder}
+            \end{figure}
+
+        
+        \vspace{1cm} % Espaço para resposta
+
+        \item Efetue a migração para o arquivo \texttt{data20.8.dx40} e explique as diferenças entre o resultado da migração para o arquivo \texttt{data10.8.dx40}.
+
+        --------------------------------------------------------------------------
+
+        As figuras 7 e 8 mostram os resultados obtidos. A diferença entre os resultados é devido ao falseamento espacial nas regiões de mergulho íngrime, pois o dx = 40m é insuficiente para amostrar inclinações de onda de 20Hz, pois quando a frequência dobra, o comprimento de onda cai pela metade. 
+
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=1\linewidth]{migracao-stolt4.png}
+            \caption{Migração de Stolt com f = 10Hz}
+            \label{fig:placeholder}
+        \end{figure}
+
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=1\linewidth]{migracao-stolt5.png}
+            \caption{Migração de Stolt com f = 20Hz}
+            \label{fig:placeholder}
+        \end{figure}
+        
+        
+        \vspace{1cm} % Espaço para resposta
+
+        \item Qual deverá ser o intervalo entre cdps para os dados apresentados no arquivo \texttt{data20.8.dx40} para que não ocorra falseamento espacial? Explique.
+
+        --------------------------------------------------------------------------
+
+        Um intervalo adequado seria um dx = 20m, pois ao dobrar a frequência, se reduz o comprimento de onda pela metade. Dessa forma, não ocorreria falseamento. 
+        
+        \vspace{1cm} % Espaço para resposta
+
+        \item Gere o dado sintético para o intervalo escolhido acima utilizando o script \texttt{makedata.sh} e efetue a migração para verificar a qualidade do resultado.
+        
+        \textbf{Insira a imagem da seção migrada para o dado que foi gerado abaixo:}
+
+            --------------------------------------------------------------------------
+
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=1\linewidth]{makedata.png}
+                \caption{Dado sintético gerado.}
+                \label{fig:placeholder}
+            \end{figure}
+
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=1\linewidth]{migracao-stolt6.png}
+                \caption{Migração de Stolt.}
+                \label{fig:placeholder}
+            \end{figure}
+
+        
+        % \includegraphics[width=0.8\textwidth]{sua_imagem_aqui.png}
+        \vspace{1cm} % Espaço reservado para a imagem
+    \end{enumerate}
+\end{enumerate}
+
+\newpage
+
+% --- PARTE II ---
+\section*{PARTE II: Migração no domínio da frequência: exemplo com várias camadas}
+
+A Migração no domínio da frequência de Stolt não aceita variação lateral de velocidades, apenas vertical. Isso não foi uma limitação para o exemplo da Parte I, mesmo para a interface com grande variação lateral de profundidade, pois o modelo era de apenas uma interface.
+
+\begin{enumerate}[label=\textbf{4.\arabic*}]
+    \item Avalie o uso da Migração de Stolt na seção empilhada obtida com os dados sintéticos da aula prática de análise de velocidades.
+    
+    Neste caso, o modelo de velocidades varia lateralmente, mas vamos procurar definir um modelo de velocidades (variação de velocidade apenas com o tempo) que seja o mais representativo possível para os dados utilizados.
+    
+    Para tal, complete as informações que faltam no comando abaixo:
+    \textit{(lembrando que da forma como está implementada no SU, a migração de Stolt requer os valores da velocidade de rms (ou de nmo))}
+
+\begin{lstlisting}[language=bash]
+sustolt cdpmin=1 cdpmax=458 dxcdp=25 vmig=____ tmig=____ < arquivo_entrada | suximage ...
+\end{lstlisting}
+
+    Informe os valores dos parâmetros \texttt{vmig} e \texttt{tmig} utilizados. Se você avaliar mais que um modelo, informe quais foram os testes realizados.
+
+--------------------------------------------------------------------------
+
+Esse foi o comando utilizado:
+
+sustolt cdpmin=1 cdpmax=458 dxcdp=25 vmig=1500,2000,2500,3000 tmig=0.0,1.0,2.0,3.0 < data20.8.dx20 | suximage perc=99 title="Migracao Stolt V(t)" \&
+
+A figura 9 mostra o dado sintético utilizado. A figura 11 mostra a migração.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{migracao-stolt7.png}
+    \caption{Migração de Stolt.}
+    \label{fig:placeholder}
+\end{figure}
+
+    
+    
+    
+
+    \item Com base nos seus testes e resultados, comente sobre a eficiência e incertezas do método de Stolt quando aplicado a esses dados.
+
+    --------------------------------------------------------------------------
+
+
+    O método de Stolt não consegue focar perfeitamente toda a seção ao mesmo tempo. Ele é uma aproximação rápida, mas perde precisão em geologias complexas com forte variação lateral.
+    
+    \vspace{1cm} % Espaço para resposta
+\end{enumerate}
+
+\end{document}
